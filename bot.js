@@ -1,6 +1,6 @@
 const { mapSeries } = require('async');
 const TelegramBot = require('node-telegram-bot-api');
-
+const telegramDb = require('./database/telegramDb');
 const token = '6507809020:AAGKxThnPxDXQUR6DRzciaiHWFiq2L_l4nQ';
 const bot = new TelegramBot(token, { polling: true });
 

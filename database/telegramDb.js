@@ -5,3 +5,10 @@ console.log("you are connect")
 }).catch((err)=>{
 console.log("eror to connect to the data base",err)
 })
+
+const userShema = new db.Schema({
+studentName: String,
+studentPhone: String
+})
+
+module.exports = db.model('telegramuser',userShema)
