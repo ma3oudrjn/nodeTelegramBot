@@ -8,7 +8,9 @@ console.log("eror to connect to the data base",err)
 
 const userShema = new db.Schema({
 studentName: String,
-studentPhone: String
+studentPhone: String,
+userId: String
 })
 
-module.exports = db.model('telegramuser',userShema)
+const userInfo=db.model('userDb',userShema)
+module.exports = userInfo
