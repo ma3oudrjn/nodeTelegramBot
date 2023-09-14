@@ -15,7 +15,7 @@ bot.onText(/\/start/, (msg) => {
       ],
     }),
   };
-  bot.sendMessage(msg.chat.id, "Welcome", startmenu);
+  bot.sendMessage(msg.chat.id, "سلام به ربات فرادید خوش آمدید", startmenu);
   bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIBCmUAAQ50sZ1fSRmM6MJlVNQy5qD3uQACYcAxG54tAAFQW4iTpfYLQh0BAAMCAAN5AAMwBA');
 });
 
@@ -63,7 +63,6 @@ bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
   bot.sendMessage(msg.chat.id,'ممنون در اسرا وقت با شما تماس خواهیم گرفت❤️')
 
 })
-  
 
 });
 });
