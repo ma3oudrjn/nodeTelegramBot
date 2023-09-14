@@ -49,12 +49,24 @@ bot.onText(/\/angular_boot_camp/, async msg => {
   });
   bot.onReplyToMessage(msg.chat.id, namePrompt.message_id, async (nameMsg) => {
       const name = nameMsg.text;
+      console.log(name);
       // save name in DB if you want to ...
-      await bot.sendMessage(msg.chat.id, `${name}جان شماره خود را وارد کنید `);
-  });
+      let x=await bot.sendMessage(msg.chat.id, `${name} جان شماره خود را وارد کنید`,{
+        reply_markup: {
+          force_reply: true,
+      },
+    })
+
+bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
+  const phoneNumber=phoneMsg.text
+  console.log(phoneNumber);
+  bot.sendMessage(msg.chat.id,'ممنون در اسرا وقت با شما تماس خواهیم گرفت❤️')
+
+})
+  
 
 });
-
+});
 
 
 bot.on('message', (msg) => {
