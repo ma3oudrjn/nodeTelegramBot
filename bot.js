@@ -27,7 +27,7 @@ bot.on('message', (msg) => {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
-        ['/بوت کمپ آموزش انگولار🔥']
+        ['/ بوت کمپ آموزش انگولار🔥']
       ],
       resize_keyboard: true,
     }),
@@ -40,7 +40,7 @@ bot.on('message', (msg) => {
 
 
 
-bot.onText(/\/بوت کمپ آموزش انگولار🔥/, async msg => {
+bot.onText(/\/ بوت کمپ آموزش انگولار🔥/, async msg => {
   const namePrompt = await bot.sendMessage(msg.chat.id, "اسم خود را وارد کنید", {
       reply_markup: {
           force_reply: true,
