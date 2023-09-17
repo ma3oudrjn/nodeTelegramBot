@@ -17,7 +17,8 @@ bot.onText(/\/start/, (msg) => {
     }),
   };
   bot.sendMessage(msg.chat.id, "سلام به ربات فرادید خوش آمدید", startmenu);
-  bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIBCmUAAQ50sZ1fSRmM6MJlVNQy5qD3uQACYcAxG54tAAFQW4iTpfYLQh0BAAMCAAN5AAMwBA');
+  bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIEsGUGnixovuSBi2M9ro2OPh7VIx8ZAALfvzEbIb4xUI9gZnxHReIjAQADAgADeQADMAQ');
+
 });
 
 bot.on('message', (msg) => {
@@ -26,7 +27,7 @@ bot.on('message', (msg) => {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
-        ['/angular_boot_camp']
+        ['/بوت کمپ آموزش انگولار🔥']
       ],
       resize_keyboard: true,
     }),
@@ -39,7 +40,7 @@ bot.on('message', (msg) => {
 
 
 
-bot.onText(/\/angular_boot_camp/, async msg => {
+bot.onText(/\/بوت کمپ آموزش انگولار🔥/, async msg => {
   const namePrompt = await bot.sendMessage(msg.chat.id, "اسم خود را وارد کنید", {
       reply_markup: {
           force_reply: true,
@@ -57,9 +58,19 @@ bot.onText(/\/angular_boot_camp/, async msg => {
     })
 
 bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
+  let startmenu = {
+    reply_to_message_id: msg.message_id,
+    reply_markup: JSON.stringify({
+      keyboard: [
+        ['درباره ما'],
+        ['ثبت نام دوره های آموزشی'],
+        ['ارتباط با ما']
+      ],
+    }),
+  };
   const phoneNumber=phoneMsg.text
   console.log(phoneNumber);
-  bot.sendMessage(msg.chat.id,'ممنون در اسراع وقت با شما تماس خواهیم گرفت❤️')
+  bot.sendMessage(msg.chat.id,'ممنون در اسراع وقت با شما تماس خواهیم گرفت❤️',startmenu)
   const saveUser = new userInfo({
     studentName:name,
     studentPhone:phoneNumber,
@@ -75,8 +86,11 @@ bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
 
 bot.on('message', (msg) => {
   if (msg.text == 'درباره ما') {
-    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIBj2UAAReYMuaA-LTMH0KB-A4WXj5z3wACdsAxG54tAAFQssVBJUshrtYBAAMCAAN5AAMwBA');
+    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIErWUGnbjOHom-pgOH2KAJMYWWCySJAALdvzEbIb4xUBomFc2abpzHAQADAgADeQADMAQ');
   } else if (msg.text == 'ارتباط با ما') {
-    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIBlGUAARgP-xwJzSL70SLOPB8QG3lkSwACd8AxG54tAAFQZXIlrM9ePekBAAMCAAN5AAMwBA');
+    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIEr2UGnf9JBXPU8dkr_XOS8nEervXCAALevzEbIb4xUNd84WUr3ZbbAQADAgADeQADMAQ');
 
 }});
+// bot.on('message',(msg)=>{
+// console.log(msg);
+// })
