@@ -10,9 +10,9 @@ bot.onText(/\/start/, (msg) => {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
-        ['درباره ما'],
+        
         ['ثبت نام دوره های آموزشی'],
-        ['ارتباط با ما']
+        ['ارتباط با ما', 'درباره ما']
       ],
     }),
   };
@@ -62,9 +62,9 @@ bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
       keyboard: [
-        ['درباره ما'],
+      
         ['ثبت نام دوره های آموزشی'],
-        ['ارتباط با ما']
+        ['ارتباط با ما', 'درباره ما']
       ],
     }),
   };
