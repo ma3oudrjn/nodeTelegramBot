@@ -91,6 +91,11 @@ bot.on('message', (msg) => {
     bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIEr2UGnf9JBXPU8dkr_XOS8nEervXCAALevzEbIb4xUNd84WUr3ZbbAQADAgADeQADMAQ');
 
 }});
-// bot.on('message',(msg)=>{
-// console.log(msg);
-// })
+
+
+function logTimeAndDate() {
+  const now = new Date();
+  console.log(`Current time and date: ${now.toLocaleString()}`);
+}
+logTimeAndDate();
+setInterval(logTimeAndDate, 5 * 60 * 1000); 
