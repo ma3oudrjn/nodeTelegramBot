@@ -1,8 +1,10 @@
-const { mapSeries } = require('async');
 const TelegramBot = require('node-telegram-bot-api');
-const saveUser = require('./database/telegramDb');
 const userInfo = require('./database/telegramDb');
-const token = 'xxxxx';
+const token = '6481529792:AAHWeovDl1eJntMzz94yT5CPG1Zc-T9lqqw';
+const express = require('express')
+
+const app = express()
+app.use(express.json()) 
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
@@ -17,7 +19,7 @@ bot.onText(/\/start/, (msg) => {
     }),
   };
   bot.sendMessage(msg.chat.id, "سلام به ربات فرادید خوش آمدید", startmenu);
-  bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIEsGUGnixovuSBi2M9ro2OPh7VIx8ZAALfvzEbIb4xUI9gZnxHReIjAQADAgADeQADMAQ');
+  bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAMdZQfymDjtDgjamwwlEE1xsN7Y8kIAAh7EMRvOQUFQgqw_-wr4UhIBAAMCAAN5AAMwBA');
 
 });
 
@@ -83,19 +85,83 @@ bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
 });
 });
 
-
+//upload image
 bot.on('message', (msg) => {
   if (msg.text == 'درباره ما') {
-    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIErWUGnbjOHom-pgOH2KAJMYWWCySJAALdvzEbIb4xUBomFc2abpzHAQADAgADeQADMAQ');
+    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAMdZQfymDjtDgjamwwlEE1xsN7Y8kIAAh7EMRvOQUFQgqw_-wr4UhIBAAMCAAN5AAMwBA');
   } else if (msg.text == 'ارتباط با ما') {
-    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAIEr2UGnf9JBXPU8dkr_XOS8nEervXCAALevzEbIb4xUNd84WUr3ZbbAQADAgADeQADMAQ');
+    bot.sendPhoto(msg.chat.id, 'AgACAgQAAxkBAAMdZQfymDjtDgjamwwlEE1xsN7Y8kIAAh7EMRvOQUFQgqw_-wr4UhIBAAMCAAN5AAMwBA');
 
 }});
 
-
+//timer
 function logTimeAndDate() {
   const now = new Date();
   console.log(`Current time and date: ${now.toLocaleString()}`);
 }
 logTimeAndDate();
 setInterval(logTimeAndDate, 5 * 60 * 1000); 
+
+// port connection
+const PORT = process.env.PORT||8080;
+app.listen(PORT,(err)=>{
+    if(err){
+        console.log("err in listening PORT:",PORT);
+    }else{
+        console.log("you listening to:",PORT," port");
+    }})
+
+    //api
+    app.get('/getall/:number',async(req,res)=>{
+       await userInfo.find({}).skip(req.params.number).limit(5).then((data)=>{
+        console.log(data)
+        res.send(data);
+            }).catch((err)=>{
+        console.log(err);
+            })
+          })
+          
+          //_______________________________________
+
+app.post('/update',async(req,res)=>{
+const user = await userInfo.findById(req.params.id)
+user.isCheck=req.body.status
+console.log(user)
+user.save()
+res.send(user)
+console.log("status changed!");
+})
+
+//_______________________________________
+app.get('/getall',(req,res)=>{
+   userInfo.find({}).then((data)=>{
+   console.log(data)
+   res.send(data);
+       }).catch((err)=>{
+   console.log(err);
+       })
+     })
+     //----------------------------------------
+     //pagenashon test
+     app.get("/posts/:pagee/:limitt", async (req, res) => {
+      const page=req.params.pagee
+      const limit=req.params.limitt
+    
+      try {
+        const posts = await userInfo.find()
+          .limit(limit * 1)
+          .skip((page - 1) * limit)
+          .exec();
+    
+   
+        const count = await userInfo.countDocuments();
+    
+        res.json({
+          posts,
+          totalPages: Math.ceil(count / limit),
+          currentPage: page,
+        });
+      } catch (err) {
+        console.error(err.message);
+      }
+    });
