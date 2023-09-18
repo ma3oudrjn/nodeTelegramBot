@@ -1,14 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const userInfo = require('./database/telegramDb');
-<<<<<<< HEAD
 const token = '6481529792:AAHWeovDl1eJntMzz94yT5CPG1Zc-T9lqqw';
 const express = require('express')
 
 const app = express()
 app.use(express.json()) 
-=======
-const token = 'xxxx';
->>>>>>> main
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
@@ -117,7 +113,7 @@ app.listen(PORT,(err)=>{
 
     //api
 
-          //_______________________________________
+    //_______________________________________
 
 app.post('/update/call/:id',async(req,res)=>{
 const user = await userInfo.findById(req.params.id)
