@@ -10,7 +10,8 @@ const userShema = new db.Schema({
 studentName: String,
 studentPhone: String,
 userId: String,
-isCheck:{type: Boolean, default: false},
+isCall:{type: Boolean, default: false},
+Registered:{type: Boolean, default:false}
 })
 
 const userInfo=db.model('userDb',userShema)

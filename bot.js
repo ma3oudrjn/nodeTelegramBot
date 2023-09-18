@@ -112,21 +112,12 @@ app.listen(PORT,(err)=>{
     }})
 
     //api
-    app.get('/getall/:number',async(req,res)=>{
-       await userInfo.find({}).skip(req.params.number).limit(5).then((data)=>{
-        console.log(data)
-        res.send(data);
-            }).catch((err)=>{
-        console.log(err);
-            })
-          })
-          
+
           //_______________________________________
 
-app.post('/update',async(req,res)=>{
+app.post('/update/call/:id',async(req,res)=>{
 const user = await userInfo.findById(req.params.id)
-user.isCheck=req.body.status
-console.log(user)
+user.isCall=true
 user.save()
 res.send(user)
 console.log("status changed!");
@@ -141,9 +132,9 @@ app.get('/getall',(req,res)=>{
    console.log(err);
        })
      })
-     //----------------------------------------
+
      //pagenashon test
-     app.get("/posts/:pagee/:limitt", async (req, res) => {
+     app.get("/getuser/:pagee/:limitt", async (req, res) => {
       const page=req.params.pagee
       const limit=req.params.limitt
     
@@ -165,3 +156,12 @@ app.get('/getall',(req,res)=>{
         console.error(err.message);
       }
     });
+    //______________________________________
+    app.post('/update/Register/:id',async(req,res)=>{
+      const user = await userInfo.findById(req.params.id)
+      user.Registered=true
+      user.save()
+      res.send(user)
+      console.log("status changed!");
+      })
+      //____________________________________
