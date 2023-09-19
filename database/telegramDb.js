@@ -11,7 +11,8 @@ studentName: String,
 studentPhone: String,
 userId: String,
 isCall:{type: Boolean, default: false},
-Registered:{type: Boolean, default:false}
+Registered:{type: Boolean, default:false},
+from: String
 })
 
 const userInfo=db.model('userDb',userShema)

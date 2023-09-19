@@ -2,9 +2,20 @@ const TelegramBot = require('node-telegram-bot-api');
 const userInfo = require('./database/telegramDb');
 const token = '6481529792:AAHWeovDl1eJntMzz94yT5CPG1Zc-T9lqqw';
 const express = require('express')
+// const jwt = require("jsonwebtoken");
+const bodyParser = require('body-parser');
+var fs = require('fs');
+var util = require('util');
+// const bcrypt = require("bcrypt");
+// const path = require('path')
+// require('dotenv').config()
 
 const app = express()
+
+
 app.use(express.json()) 
+//app.use(bodyParser.json());
+
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
@@ -76,7 +87,8 @@ bot.onReplyToMessage(msg.chat.id,x.message_id,async(phoneMsg)=>{
   const saveUser = new userInfo({
     studentName:name,
     studentPhone:phoneNumber,
-    userId: msg.chat.username
+    userId: msg.chat.username,
+    from: "telegrambot"
   })
   saveUser.save()
 
@@ -100,7 +112,7 @@ function logTimeAndDate() {
   console.log(`Current time and date: ${now.toLocaleString()}`);
 }
 logTimeAndDate();
-setInterval(logTimeAndDate, 5 * 60 * 1000); 
+setInterval(logTimeAndDate, 1 * 60 * 1000); 
 
 // port connection
 const PORT = process.env.PORT||8080;
@@ -133,7 +145,7 @@ app.get('/getall',(req,res)=>{
        })
      })
 
-     //pagenashon test
+     //pagenashon
      app.get("/getuser/:pagee/:limitt", async (req, res) => {
       const page=req.params.pagee
       const limit=req.params.limitt
@@ -165,3 +177,19 @@ app.get('/getall',(req,res)=>{
       console.log("status changed!");
       })
       //____________________________________
+   app.post('/add/user',async(req,res)=>{
+    const user = await userInfo.create(req.body)
+    user.from="Admin"
+    user.save()
+    console.log(user);
+
+   })
+   //_______________________________________
+
+   var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
+   var logStdout = process.stdout;
+   console.log = function () {
+     logFile.write(util.format.apply(null, arguments) + '\n');
+     logStdout.write(util.format.apply(null, arguments) + '\n');
+   }
+   console.error = console.log;
